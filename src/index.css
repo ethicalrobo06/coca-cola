@@ -54,3 +54,9 @@ section {
 #model-section Canvas {
   pointer-events: auto;
 }
+
+.features-title,
+.benefits-title,
+.history-title {
+  will-change: transform;
+}

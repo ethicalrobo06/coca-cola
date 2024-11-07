@@ -11,46 +11,70 @@ function App() {
     gsap.from('.hero-title, .hero-description, .hero-button', {
       y: 50,
       opacity: 0,
-      duration: 1,
-      stagger: 0.3,
-      ease: 'power3.out',
+      duration: 2,
+      stagger: 0.5,
+      ease: 'power2.out',
     })
 
-    // Product Features Animation
-    gsap.from('.features-title', {
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: '.product-features',
-        start: 'top center+=100',
-        toggleActions: 'play none none reverse',
+    // Product Features Title Animation
+    gsap.fromTo(
+      '.features-title',
+      {
+        opacity: 0,
+        y: 30,
       },
-    })
+      {
+        opacity: 1,
+        y: 0,
+        duration: 2.5,
+        scrollTrigger: {
+          trigger: '.product-features',
+          start: 'top center+=200',
+          toggleActions: 'play none none none',
+        },
+        ease: 'power2.out',
+      }
+    )
 
-    // Benefits Section Animation
-    gsap.from('.benefits-title', {
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: '.benefits-section',
-        start: 'top center+=100',
-        toggleActions: 'play none none reverse',
+    // Benefits Title Animation
+    gsap.fromTo(
+      '.benefits-title',
+      {
+        opacity: 0,
+        y: 30,
       },
-    })
+      {
+        opacity: 1,
+        y: 0,
+        duration: 2.5,
+        scrollTrigger: {
+          trigger: '.benefits-section',
+          start: 'top center+=200',
+          toggleActions: 'play none none none',
+        },
+        ease: 'power2.out',
+      }
+    )
 
-    // History Section Animation
-    gsap.from('.history-title', {
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: '.history-section',
-        start: 'top center+=100',
-        toggleActions: 'play none none reverse',
+    // History Title Animation
+    gsap.fromTo(
+      '.history-title',
+      {
+        opacity: 0,
+        y: 30,
       },
-    })
+      {
+        opacity: 1,
+        y: 0,
+        duration: 2.5,
+        scrollTrigger: {
+          trigger: '.history-section',
+          start: 'top center+=200',
+          toggleActions: 'play none none none',
+        },
+        ease: 'power2.out',
+      }
+    )
 
     // Cleanup function
     return () => {
