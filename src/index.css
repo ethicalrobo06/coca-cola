@@ -1,13 +1,56 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Add these styles to your CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+.text-highlight {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.animated-border {
+  transition: transform 0.3s ease;
+}
+
+.animated-border:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Fix stacking context */
+section {
+  position: relative;
+  isolation: isolate;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure 3D model section doesn't overlap */
+#model-section {
+  pointer-events: none;
+}
+
+#model-section Canvas {
+  pointer-events: auto;
 }
