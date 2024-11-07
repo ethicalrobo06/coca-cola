@@ -25,7 +25,7 @@ export default function AnimationWrapper() {
   }, [])
 
   return (
-    <div className="absolute inset-0 w-full h-full">
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#E51E2A] to-[#B31B23]" />
 
@@ -44,8 +44,15 @@ export default function AnimationWrapper() {
       </div>
 
       {/* 3D Model */}
-      <div id="model-section" className="absolute inset-0 z-20">
-        <Canvas camera={{ position: [0, 2, 10], fov: 50 }}>
+      <div id="model-section" className="absolute inset-0 z-20 overflow-hidden">
+        <Canvas
+          camera={{
+            position: [0, 0, 40],
+            fov: 45,
+            near: 0.1,
+            far: 1000,
+          }}
+        >
           <ambientLight intensity={0.6} />
           <directionalLight position={[10, 10, 5]} intensity={1} />
           <Suspense

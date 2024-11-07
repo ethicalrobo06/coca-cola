@@ -7,14 +7,55 @@ function App() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
-    // Hero Section Animation
-    gsap.from('.hero-title, .hero-description, .hero-button', {
-      y: 50,
-      opacity: 0,
-      duration: 2,
-      stagger: 0.5,
-      ease: 'power2.out',
+    // Hero Section Animation with Timeline
+    const heroTimeline = gsap.timeline({
+      defaults: {
+        ease: 'power2.out',
+        duration: 2,
+      },
     })
+
+    heroTimeline
+      .fromTo(
+        '.hero-title',
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 2.5,
+        }
+      )
+      .fromTo(
+        '.hero-description',
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 2,
+        },
+        '-=2' // Start 2 seconds before previous animation ends
+      )
+      .fromTo(
+        '.hero-button',
+        {
+          opacity: 0,
+          y: 30,
+          scale: 0.9,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.5,
+        },
+        '-=1.5' // Start 1.5 seconds before previous animation ends
+      )
 
     // Product Features Title Animation
     gsap.fromTo(
@@ -82,6 +123,16 @@ function App() {
     }
   }, [])
 
+  const handleExploreClick = () => {
+    // Dispatch custom event
+    window.dispatchEvent(new Event('moveModel'))
+
+    // Smooth scroll to model section
+    document.querySelector('#model-section').scrollIntoView({
+      behavior: 'smooth',
+    })
+  }
+
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       {/* Hero Section */}
@@ -95,7 +146,10 @@ function App() {
           <p className="hero-description text-xl mb-8 text-white">
             Experience the iconic flavor that has been enjoyed for generations.
           </p>
-          <button className="hero-button bg-white text-[#E51E2A] py-4 px-8 rounded-full font-bold text-lg hover:bg-red-100 transform hover:scale-105 transition-all duration-300">
+          <button
+            onClick={handleExploreClick}
+            className="hero-button bg-white text-[#E51E2A] py-4 px-8 rounded-full font-bold text-lg hover:bg-red-100 transform hover:scale-105 transition-all duration-300"
+          >
             Explore Now
           </button>
         </div>

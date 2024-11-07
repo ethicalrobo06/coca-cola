@@ -12,21 +12,24 @@ function ProductModel() {
 
   useEffect(() => {
     if (modelRef.current) {
-      // Reset initial position
-      modelRef.current.position.set(0, 5, 0)
+      // Adjusted initial position
+      modelRef.current.position.set(50, 0, 0)
       modelRef.current.rotation.set(0, 0, 0)
 
-      // Animate position and rotation on scroll
-      gsap.to(modelRef.current.position, {
-        y: 0,
-        scrollTrigger: {
-          trigger: '#model-section',
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: true,
-        },
+      // Listen for custom event
+      window.addEventListener('moveModel', () => {
+        gsap.to(modelRef.current.position, {
+          x: 0,
+          y: -1,
+          z: 0,
+          duration: 2.5,
+          ease: 'power3.inOut',
+        })
       })
+    }
 
+    // Scroll animation
+    if (modelRef.current) {
       gsap.to(modelRef.current.rotation, {
         x: Math.PI * 2,
         scrollTrigger: {
@@ -37,14 +40,18 @@ function ProductModel() {
         },
       })
     }
+
+    return () => {
+      window.removeEventListener('moveModel', () => {})
+    }
   }, [])
 
   return (
     <primitive
       ref={modelRef}
       object={gltf.scene}
-      scale={28}
-      position={[0, 5, 0]}
+      scale={80}
+      position={[50, 0, 0]}
     />
   )
 }
